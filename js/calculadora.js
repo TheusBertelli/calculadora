@@ -1,4 +1,3 @@
-// Pegamos a tela (input) do HTML para poder modificá-la
 const tela = document.getElementById('tela');
 
 // Função para adicionar números e operadores na tela
@@ -6,25 +5,31 @@ function adicionar(valor) {
     tela.value += valor;
 }
 
+// Função para apagar apenas o último número (botão de deletar)
+function apagar() {
+    tela.value = tela.value.slice(0, -1);
+}
+
 // Função para limpar a tela totalmente (botão AC)
 function limparTela() {
     tela.value = '';
 }
 
-// Função para fazer a conta quando apertar o "="
+// Função para fazer a conta
 function calcular() {
     try {
-        // A função eval() lê uma string (ex: "2+2") e calcula o resultado em JavaScript
-        // Se a conta for válida, ele mostra na tela.
         if (tela.value !== "") {
+            // 1. Primeiro, fazemos a conta matemática e mostramos o resultado na tela
             tela.value = eval(tela.value);
-        
+            
+            // 67 :D
+            if (tela.value == "67") {
+                window.alert("Parabéns, você farmou aura...");
+            }
         }
     } catch (erro) {
-        // Se o usuário digitar algo absurdo (ex: 5++/*3), mostramos um erro
+        // Se a conta for inválida (ex: 2++2), dá erro(depois eu faço algo pra nn duplicar sinal)
         tela.value = 'Erro';
-        
-        // Limpa o erro automaticamente após 1.5 segundos
         setTimeout(() => {
             limparTela();
         }, 1500);
